@@ -25,4 +25,16 @@ router.post("/:id/reviews", (req, res) => {
     res.json({ msg: "/api/products/:id/reviews endpoint reached successfully"});
 });
 
+
+// PUT /api/products/...
+router.put("/:id", (req, res) => {
+    res.json( {msg: "/api/products/:id endpoint reached successfully"} )
+});
+
+
+// DELETE /api/products/...
+router.delete("/:id", (req, res) => {
+    res.json( {msg: "/api/products/:id endpoint reached successfully"} )
+});
+
 module.exports = router;
