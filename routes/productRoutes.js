@@ -1,40 +1,27 @@
 const express = require("express");
 const router = express.Router();
+const { getProducts, getProduct, getProductReviews,
+        createProduct, createProductReview,
+        updateProduct,
+        deleteProduct } = require("../controllers/productController"); 
 
 
 // GET /api/products/...
-router.get("/", (req, res) => {
-    res.json({msg: "api/products endpoint reached successfully"});
-});
-router.get("/reviews", (req, res) => {
-    res.json({msg: "api/product/reviews endpoint reached successfully"});
-});
-router.get("/:id", (req, res) => {
-    res.json({msg: "api/products/:id endpoint reached successfully"});
-});
-router.get("/:id/reviews", (req, res) => {
-    res.json({msg: "/api/products/:id/reviews endpoint reached successfully"});
-});
+router.get("/", getProducts);
+router.get("/:id", getProduct);
+router.get("/:id/reviews", getProductReviews);
 
 
 // POST /api/products/...
-router.post("/", (req, res) => {
-    res.json({msg: "/api/products endpoint reached successfully"});
-});
-router.post("/:id/reviews", (req, res) => {
-    res.json({ msg: "/api/products/:id/reviews endpoint reached successfully"});
-});
+router.post("/", createProduct);
+router.post("/:id/reviews", createProductReview);
 
 
 // PUT /api/products/...
-router.put("/:id", (req, res) => {
-    res.json( {msg: "/api/products/:id endpoint reached successfully"} )
-});
+router.put("/:id", updateProduct);
 
 
 // DELETE /api/products/...
-router.delete("/:id", (req, res) => {
-    res.json( {msg: "/api/products/:id endpoint reached successfully"} )
-});
+router.delete("/:id", deleteProduct);
 
 module.exports = router;
