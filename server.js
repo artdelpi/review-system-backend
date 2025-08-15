@@ -8,32 +8,10 @@ const dotenv = require("dotenv").config();
 const app = express(); 
 const port = process.env.PORT || 5000;
 
-
-// GET + users & reviews endpoints + controller
+// (any) HTTP requests involving users
 app.use("/api/users", require("./routes/userRoutes"));
-
-// GET + products & reviews endpoints + controller
-app.get("/api/products", (req, res) => {
-    res.json({msg: "api/products endpoint reached successfully"});
-});
-app.get("/api/products/reviews", (req, res) => {
-    res.json({msg: "api/product/reviews endpoint reached successfully"});
-});
-app.get("/api/products/:id", (req, res) => {
-    res.json({msg: "api/products/:id endpoint reached successfully"});
-});
-app.get("/api/products/:id/reviews", (req, res) => {
-    res.json({msg: "/api/products/:id/reviews endpoint reached successfully"});
-});
-
-
-// POST + products & reviews endpoints + controller
-app.post("/api/products", (req, res) => {
-    res.json({msg: "/api/products endpoint reached successfully"});
-});
-app.post("/api/products/:id/reviews", (req, res) => {
-    res.json({ msg: "/api/products/:id/reviews endpoint reached successfully"});
-});
+// (any) HTTP requests involving products
+app.use("/api/products", require("./routes/productRoutes"));
 
 // Runs server on port ${port}
 app.listen(port, () => {
