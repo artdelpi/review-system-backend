@@ -1,49 +1,30 @@
 const express = require("express");
 const router = express.Router();
-
+const { getUser, getUserReviews, getUserProducts,
+        userLogin, userRegister, 
+        updateUser, updateUserProduct, updateUserReview, 
+        deleteUser, deleteUserProduct, deleteUserReview } = require("../controllers/userController");
 
 // GET /api/users/...
-router.get("/:userId", (req, res) => {
-    res.json({msg: "api/users/:userId endpoint reached successfully"});
-});
-router.get("/:userId/reviews", (req, res) => {
-    res.json({msg: "api/users/:userId/reviews endpoint reached successfully"});
-});
-router.get("/:userId/products", (req, res) => {
-    res.json({msg: "api/users/:userId/products endpoint reached successfully"});
-});
+router.get("/:userId", getUser);
+router.get("/:userId/reviews", getUserReviews);
+router.get("/:userId/products", getUserProducts);
 
 
 // POST /api/users/...
-router.post("/login", (req, res) => {
-    res.json({msg: "api/users/login endpoint reached successfully"});
-});
-router.post("/register", (req, res) => {
-    res.json({msg: "api/users/register endpoint reached successfully"});
-});
+router.post("/login", userLogin);
+router.post("/register", userRegister);
 
 
 // PUT /api/users/...
-router.put("/:id", (req, res) => {
-    res.json({ msg: "/api/users/:userId endpoint reached successfully"});
-});
-router.put("/:userId/products/:productId", (req, res) => {
-    res.json({ msg: "/api/users/:userId/products/:productId endpoint reached successfully"});
-});
-router.put("/:userId/reviews/:reviewId", (req, res) => {
-    res.json({ msg: "/api/users/:userId/reviews/:reviewId endpoint reached successfully"});
-});
+router.put("/:id", updateUser);
+router.put("/:userId/products/:productId", updateUserProduct);
+router.put("/:userId/reviews/:reviewId", updateUserReview);
 
 
 // DELETE /api/users/...
-router.delete("/:userId", (req, res) => {
-    res.json({ msg: "/api/users/:userId endpoint reached successfully"});
-});
-router.delete("/:userId/reviews/:reviewId", (req, res) => {
-    res.json({ msg: "/api/users/:userId/reviews/:reviewId endpoint reached successfully"});
-});
-router.delete("/:userId/products/:productId", (req, res) => {
-    res.json({ msg: "/api/users/:userId/products/:productId endpoint reached successfully"});
-});
+router.delete("/:userId", deleteUser);
+router.delete("/:userId/reviews/:reviewId", deleteUserReview);
+router.delete("/:userId/products/:productId", deleteUserProduct);
 
 module.exports = router;
