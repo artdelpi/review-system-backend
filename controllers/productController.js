@@ -1,20 +1,23 @@
 const Product = require("../models/productModel");
 const asyncHandler = require("express-async-handler");
 
-//@acess public
+//@route GET /api/products
+//@access public
 const getProducts = asyncHandler(async(req, res) => {
     const products = await Product.find()
     res.status(200).json({ msg: products });
 });
 
-
-//@acess public
+ 
+//@route GET /api/products/:id
+//@access public
 const getProduct = (req, res) => {
     res.json({ msg: "/api/products/:id endpoint reached successfully" })
 };
 
 
-//@acess public
+//@route GET /api/products/:id/reviews
+//@access public
 const getProductReviews = (req, res) => {
     res.json({ msg: "/api/products/:id/reviews endpoint reached successfully" })
 };
@@ -22,7 +25,7 @@ const getProductReviews = (req, res) => {
 
 //@route POST /api/products
 //@access public
-const createProduct= (req, res) => {
+const createProduct = asyncHandler(async (req, res) => {
     // Grabs product attributes
     const {
         name, 
@@ -40,28 +43,37 @@ const createProduct= (req, res) => {
             next(err); // calls errorHandler middleware
         };
     
+    // Creates and stores a new document in MongoDB
+    const product = await Product.create({
+        name,
+        category,
+        price,
+        description,
+        image
+    });
     
-    res.json({ msg: "/api/products endpoint reached successfully" });
-};
+    res.status(201).json({ product });
+});
 
-
+//@route POST /api/products/:id/reviews
 //@access public
 const createProductReview = (req, res) => {
     res.json({ msg: "/api/products/:id/reviews endpoint reached successfully" })
 };
 
 
+//@route PUT /api/products/:id
 //@access public
 const updateProduct = (req, res) => {
     res.json({ msg: "/api/products/:id endpoint reached successfully"});
 };
 
 
+//@route DELETE /api/products/:id
 //@access public
 const deleteProduct =  (req, res) => {
     res.json({ msg: "/api/products/:id endpoint reached successfully"});
 };
-
 
 module.exports = { getProducts, getProduct, getProductReviews,
                    createProduct, createProductReview,
