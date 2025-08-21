@@ -1,9 +1,14 @@
 // Web framework; Application obj as "app" (server instance)
 const express = require("express");
-const errorHandler = require("./middleware/errorHandler");
+
+// 
+const connectDb = require("./config/dbConnection");
 
 // Reads the .env file and updates process.env
 const dotenv = require("dotenv").config();
+const errorHandler = require("./middleware/errorHandler");
+
+connectDb();
 
 // Server instance 
 const app = express(); 
@@ -15,6 +20,7 @@ app.use(express.json());
 app.use("/api/users", require("./routes/userRoutes"));
 // (any) HTTP requests involving products
 app.use("/api/products", require("./routes/productRoutes"));
+
 app.use(errorHandler);
 
 // Runs server on port ${port}
