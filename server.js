@@ -1,12 +1,9 @@
 // Web framework; Application obj as "app" (server instance)
 const express = require("express");
-
-// 
-const connectDb = require("./config/dbConnection");
-
 // Reads the .env file and updates process.env
 const dotenv = require("dotenv").config();
 const errorHandler = require("./middleware/errorHandler");
+const connectDb = require("./config/dbConnection");
 
 connectDb();
 
@@ -16,6 +13,7 @@ const port = process.env.PORT || 5000;
 
 // Parses received JSONs
 app.use(express.json());
+
 // (any) HTTP requests involving users
 app.use("/api/users", require("./routes/userRoutes"));
 // (any) HTTP requests involving products
